@@ -1,0 +1,34 @@
+* {
+    margin: 0;
+}
+
+.signup_form_parent {
+    margin-top: 40px;
+    display: flex;
+    width: 100%;
+    height: 100vh;
+    flex-direction: column;
+    align-items: center;
+}
+
+.signup_form {
+    font-family: 'Montserrat';
+    color: #232323;
+    width: min(600px, 100%);
+    padding: 1%;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.signup_heading {
+    font-weight: bold;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    margin-bottom: 50px;
+    align-self: center;
+
+}
+
