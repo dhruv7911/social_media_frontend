@@ -1,12 +1,13 @@
 import React from 'react'
 import "./Input.css"
-const Input = (props) => {
+const Input = ({name,value,onChange,onBlur}) => {
   return (<>
-  <p className='input_heading'>{props.name}</p>
+  <p className='input_heading'>{name}</p>
   <input
         className="input_input"
-        value={props.value}
-        onChange={(e)=>{props.onChange(props.name,e.target.value)}}
+        value={value}
+        onChange={(e)=>{onChange(name,e.target.value)}}
+        onBlur={()=>{onBlur(name)}}
 
     />
   </>
