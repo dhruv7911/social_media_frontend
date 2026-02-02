@@ -1,0 +1,47 @@
+.google_button {
+    margin-top: 20px;
+    width: 90%;
+    font-family: 'Montserrat';
+    font-size: 1rem;
+    background: none;
+    border: none;
+    box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
+    background-color: rgb(255, 255, 255);
+    border-radius: 6px;
+    padding: 1.5%;
+    padding-top: 2%;
+    padding-bottom: 2%;
+    font-weight: bolder;
+    color: rgb(0, 0, 0);
+    box-sizing: border-box;
+}
+
+.google-logo-img {
+    width: 100%;
+    align-self: flex-start;
+    height: auto;
+    max-width: 20px;
+}
+
+.google_button_flex {
+    display: flex;
+    height: 100%;
+    width: 100%;
+    position: relative;
+    align-items: center;
+}
+.img-flex{
+    position: absolute;
+    left: 0;
+    display: flex;
+    align-items: center;
+
+}
+.google-logo-img {
+    align-self: flex-start;
+}
+
+.google-button-text {
+    text-align:enter;
+    width: 100%;
+}

@@ -1,0 +1,7 @@
+.input-error{
+    display: flex;
+    width: 90%;
+    color: red;
+    align-items: flex-start;
+    
+}

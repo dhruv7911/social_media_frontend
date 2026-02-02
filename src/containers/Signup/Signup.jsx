@@ -1,66 +1,122 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import "./Signup.css"
 import Input from '../../components/Input/Input'
 import Button from '../../components/Button/Button'
 import Logo from '../../components/Logo/Logo'
+import GoogleButton from '../../components/GoogleButton/GoogleButton'
+import { validate } from './validate'
+import { InputError } from './InputError'
 const Signup = () => {
-    const handleChange = (field,value)=>{
-        setFormData((prev)=>({
+    const [error, setError] = useState({})
+    const [touched, setTouched] = useState({})
+    const [isLoading, setLoading] = useState(false)
+    const [formData, setFormData] = useState({
+        Email: "",
+        Username: "",
+        Password: "",
+        "Confirm Password": ""
+    });
+    useEffect(() => {
+        const result = validate(formData);
+        setError(result.error);
+    }, [formData])
+    const handleBlur = (field) => {
+        setTouched(prev => ({
             ...prev,
-            [field]:value
+            [field]: true
+        }))
+    }
+    const handleChange = (field, value) => {
+        setFormData((prev) => ({
+            ...prev,
+            [field]: value
         }))
         console.log(formData)
     }
-    const [formData,setFormData]=useState({
-        Email:"",
-        Username:"",
-        Password:"",
-        "Confirm Password":""
-    });
-    function request(){
-        
+
+    function req() {
+
+
+        const result = validate(formData);
+        if (result.isValid) {
+            console.log("success")
+        } else {
+            setTouched({
+            Email: true,
+            Username: true,
+            Password: true,
+            "Confirm Password": true
+        });
+        }
     }
-    const [isLoading,setLoading]=useState(false)
+
+
     return (
-        <div className='signup_form_parent'>  
-            <Logo height={40}/>
-        <div className='signup_form'>
-            
-            <h2 className='signup_heading'>Sign up to ThinkTalk</h2>
-            <Input
-                name="Email"
-                key="Email"
-                value={formData["Email"]}
-                onChange={handleChange}
-            />
-            <Input
-                name="Username"
-                key="Username"
-                value={formData["Username"]}
-                onChange={handleChange}
-            />
-            <Input
-                name="Password"
-                key="Password"
-                value={formData["Password"]}
-                onChange={handleChange}
-            />
-            <Input
-                name="Confirm Password"
-                key="Confirm Password"
-                value={formData["Confirm Password"]}
-                onChange={handleChange}
-            />
-            <div style={{marginBottom:20}}>
+        <div className='signup_form_parent'>
+
+            <div className='signup_form'>
+                <Logo height={40} />
+                <h2 className='signup_heading'>Sign up to ThinkTalk</h2>
+                <Input
+                    name="Email"
+                    key="Email"
+                    value={formData["Email"]}
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+
+                />
+                <InputError
+                    errorMessage={error.Email}
+                    touched={touched.Email}
+                />
+                <Input
+                    name="Username"
+                    key="Username"
+                    value={formData["Username"]}
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                />
+                <InputError
+                    errorMessage={error.Username}
+                    touched={touched.Username}
+                />
+                <Input
+                    name="Password"
+                    key="Password"
+                    value={formData["Password"]}
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                />
+                <InputError
+                    errorMessage={error.Password}
+                    touched={touched.Password}
+                />
+                <Input
+                    name="Confirm Password"
+                    key="Confirm Password"
+                    value={formData["Confirm Password"]}
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                />
+                <InputError
+                    errorMessage={error["Confirm Password"]}
+                    touched={touched["Confirm Password"]}
+                />
+                <div style={{ marginBottom: 20 }}>
+
+                </div>
+
+                <Button
+                    isLoading={isLoading}
+                    name="Sign up"
+                    onClick={req}
+                />
+                
+                <GoogleButton
+                    name="Continue with Google"
+                />
 
             </div>
-            
-            <Button
-                isLoading={isLoading}
-                name="Sign up"
-                onClick={request}
-            />
-        </div>
         </div>
     )
 }
