@@ -1,0 +1,22 @@
+name: Deploy to Vercel
+
+on:
+  push:
+    branches:
+      - main  # Change to your branch name
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      
+      - name: Deploy to Vercel
+        uses: amondnet/vercel-action@v25
+        with:
+          vercel-token: "C7NG636RgZimpGKYs9Np8wjr"
+          vercel-org-id: "team_ZWZkOOlC3oDb87UAwWnfSkvG"
+          vercel-project-id: "prj_b8W2o8HpBuetThcXAxXaerWzneyA"
+          vercel-args: '--prod'
