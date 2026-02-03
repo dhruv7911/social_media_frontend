@@ -6,6 +6,7 @@ import Logo from '../../components/Logo/Logo'
 import GoogleButton from '../../components/GoogleButton/GoogleButton'
 import { validate } from './validate'
 import { InputError } from './InputError'
+import { Heading } from '../../components/linedheading/Heading'
 const Signup = () => {
     const [error, setError] = useState({})
     const [touched, setTouched] = useState({})
@@ -38,26 +39,26 @@ const Signup = () => {
         const result = validate(formData);
         if (result.isValid) {
             const url = "http://localhost:8080/server/api/register";
-            try{
-                const response = await fetch(url,{
-                    method:"POST",
+            try {
+                const response = await fetch(url, {
+                    method: "POST",
                     body: JSON.stringify({
-                        Username:formData.Username,
-                        Email:formData.Email,
-                        Password:formData.Password,
-                        ConfirmPassword:FormData["Confirm Password"]
+                        Username: formData.Username,
+                        Email: formData.Email,
+                        Password: formData.Password,
+                        ConfirmPassword: FormData["Confirm Password"]
                     })
                 })
-            }catch(error){
+            } catch (error) {
                 console.log(error.message)
             }
         } else {
             setTouched({
-            Email: true,
-            Username: true,
-            Password: true,
-            "Confirm Password": true
-        });
+                Email: true,
+                Username: true,
+                Password: true,
+                "Confirm Password": true
+            });
         }
     }
 
@@ -119,7 +120,12 @@ const Signup = () => {
                     name="Create an account"
                     onClick={req}
                 />
-                
+                <Heading
+                    
+                    text="OR"
+                    textSize="clamp(12px, 1vw, 16px)"
+                    marginBlock="10px"
+                />
                 <GoogleButton
                     name="Continue with Google"
                 />

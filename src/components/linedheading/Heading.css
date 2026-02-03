@@ -1,0 +1,12 @@
+.line-heading{
+    display: flex;
+    align-items: center;
+    text-align: center;
+}
+.line-heading::before,
+.line-heading::after{
+    content:'';
+    flex: 1;
+    border-bottom: 1px solid #D1D1D1;
+    
+}
