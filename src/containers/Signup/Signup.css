@@ -1,36 +1,37 @@
 * {
     margin: 0;
+    font-family: 'Inter';
 }
 
 .signup_form_parent {
     margin-top: 40px;
     display: flex;
-    width: 100%;
     height: 100vh;
     flex-direction: column;
     align-items: center;
 }
 
 .signup_form {
-    font-family: 'Montserrat';
     color: #232323;
-    width: min(600px, 100%);
+    width: min(600px, 90%);
     padding: 1%;
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
-    align-items: center;
+    padding: clamp(2rem,1vw,1rem);
     border-radius: 10px;
     box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
 }
 
 .signup_heading {
+    font-size: clamp(1rem,3vw,3rem);
     font-weight: bold;
-    text-align: center;
     display: flex;
-    align-items: center;
-    margin-bottom: 50px;
-    align-self: center;
-
+    margin-bottom: 5px;
+}
+.signup_subheading{
+    color: #818181;
+    margin-bottom: 25px;
+    font-size: clamp(12px,1vw,16px);
 }
 

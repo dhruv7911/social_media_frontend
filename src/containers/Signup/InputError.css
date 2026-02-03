@@ -3,5 +3,5 @@
     width: 90%;
     color: red;
     align-items: flex-start;
-    
+    font-size: clamp(12px,1vw,16px);
 }

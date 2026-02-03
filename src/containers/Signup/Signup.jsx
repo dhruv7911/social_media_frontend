@@ -34,12 +34,23 @@ const Signup = () => {
         console.log(formData)
     }
 
-    function req() {
-
-
+    async function req() {
         const result = validate(formData);
         if (result.isValid) {
-            console.log("success")
+            const url = "http://localhost:8080/server/api/register";
+            try{
+                const response = await fetch(url,{
+                    method:"POST",
+                    body: JSON.stringify({
+                        Username:formData.Username,
+                        Email:formData.Email,
+                        Password:formData.Password,
+                        ConfirmPassword:FormData["Confirm Password"]
+                    })
+                })
+            }catch(error){
+                console.log(error.message)
+            }
         } else {
             setTouched({
             Email: true,
@@ -55,8 +66,8 @@ const Signup = () => {
         <div className='signup_form_parent'>
 
             <div className='signup_form'>
-                <Logo height={40} />
-                <h2 className='signup_heading'>Sign up to ThinkTalk</h2>
+                <h2 className='signup_heading'>Sign up</h2>
+                <p className='signup_subheading'>Create your account in a seconds</p>
                 <Input
                     name="Email"
                     key="Email"
@@ -102,13 +113,10 @@ const Signup = () => {
                     errorMessage={error["Confirm Password"]}
                     touched={touched["Confirm Password"]}
                 />
-                <div style={{ marginBottom: 20 }}>
-
-                </div>
 
                 <Button
                     isLoading={isLoading}
-                    name="Sign up"
+                    name="Create an account"
                     onClick={req}
                 />
                 
