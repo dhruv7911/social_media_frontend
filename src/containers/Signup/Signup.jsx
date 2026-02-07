@@ -7,6 +7,7 @@ import GoogleButton from '../../components/GoogleButton/GoogleButton'
 import { validate } from './validate'
 import { InputError } from './InputError'
 import { Heading } from '../../components/linedheading/Heading'
+import NoticeBar from '../../components/NoticeBar/NoticeBar'
 const Signup = () => {
     const [error, setError] = useState({})
     const [touched, setTouched] = useState({})
@@ -131,6 +132,7 @@ const Signup = () => {
                 />
 
             </div>
+            <NoticeBar/>
         </div>
     )
 }
