@@ -27,7 +27,7 @@ export const NoticeBar = () => {
                 src='/warning.jpg'
             />
             <h2 className='notice-bar-heading'>Error</h2>
-            <p>User already registered</p>
+            <p className='notice-bar-para'>User already registered</p>
         </div>
     </div>
   )
