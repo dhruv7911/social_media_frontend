@@ -1,10 +1,23 @@
-import React, { useState } from 'react'
+import React, { useState,useEffect } from 'react'
+
 import "./NoticeBar.css"
 export const NoticeBar = () => {
     const [visible,setVisible]=useState(true)
     function closeParent(){
         setVisible(false)
     }
+  useEffect(() => {
+    if (visible) {
+      document.body.style.overflow = "hidden"
+    } else {
+      document.body.style.overflow = "auto"
+    }
+    
+    // cleanup if component unmounts
+    return () => {
+      document.body.style.overflow = "auto"
+    }
+  }, [visible])
   if(!visible) return null
   return (
     <div className='notice-bar-parent'>
