@@ -10,6 +10,9 @@ import { Heading } from '../../components/linedheading/Heading'
 import NoticeBar from '../../components/NoticeBar/NoticeBar'
 const Signup = () => {
     const [error, setError] = useState({})
+    const [showNotice,setShowNotice]=useState(false)
+    const [noticeLogo,setNoticeLogo]=useState()
+    const [message,setMessage] = useState({})
     const [touched, setTouched] = useState({})
     const [isLoading, setLoading] = useState(false)
     const [formData, setFormData] = useState({
@@ -33,13 +36,13 @@ const Signup = () => {
             ...prev,
             [field]: value
         }))
-        console.log(formData)
     }
 
     async function req() {
         const result = validate(formData);
         if (result.isValid) {
-            const url = "http://localhost:8080/server/api/register";
+            setLoading(true);
+            const url = "http://localhost:8080/server/register";
             try {
                 const response = await fetch(url, {
                     method: "POST",
@@ -47,11 +50,47 @@ const Signup = () => {
                         Username: formData.Username,
                         Email: formData.Email,
                         Password: formData.Password,
-                        ConfirmPassword: FormData["Confirm Password"]
+                        ConfirmPassword: formData["Confirm Password"]
                     })
+                
                 })
+                const data = await response.json();
+                if(!response.ok){
+                    setNoticeLogo("/warning.jpg")
+                    setShowNotice(true);
+                    setMessage({
+                        heading:"Error",
+                        message:data.message
+                    })
+                    setLoading(false);
+                }else{
+                    if(data.status=="error"){
+                    setNoticeLogo("/warning.jpg")
+                    setShowNotice(true);
+                    setMessage({
+                        heading:data.status,
+                        message:data.message
+                    })
+                    setLoading(false);
+                    }else{
+                    setNoticeLogo("/success.png")
+                    setShowNotice(true);
+                    setMessage({
+                        heading:data.status,
+                        message:data.message
+                    })
+                    setLoading(false);
+                    }
+                }
             } catch (error) {
-                console.log(error.message)
+                setNoticeLogo("/warning.jpg")
+                console.log(error.message);
+                setShowNotice(true);
+                    setMessage({
+                        heading:"Error",
+                        message:error.message
+                    })
+                setLoading(false);
             }
         } else {
             setTouched({
@@ -62,7 +101,9 @@ const Signup = () => {
             });
         }
     }
-
+    function removeNotice(){
+        setShowNotice(false)
+    }
 
     return (
         <div className='signup_form_parent'>
@@ -76,7 +117,7 @@ const Signup = () => {
                     value={formData["Email"]}
                     onChange={handleChange}
                     onBlur={handleBlur}
-
+                    maxLength={50}
                 />
                 <InputError
                     errorMessage={error.Email}
@@ -88,6 +129,7 @@ const Signup = () => {
                     value={formData["Username"]}
                     onChange={handleChange}
                     onBlur={handleBlur}
+                    maxLength={50}
                 />
                 <InputError
                     errorMessage={error.Username}
@@ -99,6 +141,7 @@ const Signup = () => {
                     value={formData["Password"]}
                     onChange={handleChange}
                     onBlur={handleBlur}
+                    maxLength={50}
                 />
                 <InputError
                     errorMessage={error.Password}
@@ -110,6 +153,7 @@ const Signup = () => {
                     value={formData["Confirm Password"]}
                     onChange={handleChange}
                     onBlur={handleBlur}
+                    maxLength={50}
                 />
                 <InputError
                     errorMessage={error["Confirm Password"]}
@@ -130,9 +174,17 @@ const Signup = () => {
                 <GoogleButton
                     name="Continue with Google"
                 />
-
+                
             </div>
-            <NoticeBar/>
+{showNotice ? 
+  <NoticeBar
+      message_heading={message.heading}
+      message={message.message}
+      remove={removeNotice}
+      logo={noticeLogo}
+  />:<></>
+}
+
         </div>
     )
 }

@@ -1,33 +1,16 @@
 import React, { useState,useEffect } from 'react'
 
 import "./NoticeBar.css"
-export const NoticeBar = () => {
-    const [visible,setVisible]=useState(true)
-    function closeParent(){
-        setVisible(false)
-    }
-  useEffect(() => {
-    if (visible) {
-      document.body.style.overflow = "hidden"
-    } else {
-      document.body.style.overflow = "auto"
-    }
-    
-    // cleanup if component unmounts
-    return () => {
-      document.body.style.overflow = "auto"
-    }
-  }, [visible])
-  if(!visible) return null
+export const NoticeBar = ({message_heading,message,remove,logo}) => {
   return (
     <div className='notice-bar-parent'>
         <div className='notice-bar-card'>
-            <button onClick={closeParent} className='close-button-notice-board'>&#10005;</button>
+            <button onClick={remove} className='close-button-notice-board'>&#10005;</button>
             <img
-                src='/warning.jpg'
+                src={logo}
             />
-            <h2 className='notice-bar-heading'>Error</h2>
-            <p className='notice-bar-para'>User already registered</p>
+            <h2 className='notice-bar-heading'>{message_heading}</h2>
+            <p className='notice-bar-para'>{message}</p>
         </div>
     </div>
   )
